@@ -1,0 +1,119 @@
+/* ============================================================
+   Infinite Circle Field — all tunable values live here.
+   Edit the custom properties below; nothing else needs to change.
+   ============================================================ */
+
+:root {
+  /* Page */
+  --bg: #000000;
+
+  /* Grid circles: random fill picked between these two colors */
+  --circle-dark:   #6b4423;  /* medium-dark brown */
+  --circle-light:  #b98a53;  /* light brown */
+
+  /* Hover overlay circle: random fill picked between these two colors */
+  --overlay-start: #fff7c2;  /* light yellow */
+  --overlay-end:   #fffdf2;  /* near-white cream */
+
+  /* Sizes */
+  --circle-size: 28px;   /* diameter of a grid circle */
+  --cell-size: 64px;     /* grid pitch; spacing = cell-size - circle-size */
+  --overlay-size: 240px; /* diameter of the hover overlay circle */
+
+  /* Motion */
+  --fade-in: 320ms;      /* new circles arriving via infinite scroll */
+  --overlay-in: 200ms;
+  --overlay-out: 160ms;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+/* Screen-reader-only title; the field itself is decorative. */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Grid ---------- */
+
+#field {
+  /* padding-top is managed by app.js to hold scroll position steady
+     as rows above the viewport are recycled out of the DOM. */
+  padding-top: 0;
+}
+
+.row {
+  display: grid;
+  /* grid-template-columns is set from app.js once the column count is known */
+  justify-content: center;
+  height: var(--cell-size);
+}
+
+.dot {
+  width: var(--circle-size);
+  height: var(--circle-size);
+  margin: auto;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(.6);
+  transition:
+    opacity var(--fade-in) var(--ease),
+    transform var(--fade-in) var(--ease);
+  will-change: opacity, transform;
+}
+
+.dot.is-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Hover overlay ---------- */
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--overlay-size);
+  height: var(--overlay-size);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  transition:
+    opacity var(--overlay-out) var(--ease),
+    transform var(--overlay-out) var(--ease);
+  will-change: opacity, transform;
+}
+
+#overlay.is-visible {
+  opacity: 1;
+  transition:
+    opacity var(--overlay-in) var(--ease),
+    transform var(--overlay-in) var(--ease);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  #overlay,
+  #overlay.is-visible {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+}
