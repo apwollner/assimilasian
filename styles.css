@@ -5,7 +5,7 @@
 
 :root {
   /* Page */
-  --bg: #000000;
+  --bg: #FFFFFF;
 
   /* Grid circles: random fill picked between these two colors */
   --circle-dark:   #6b4423;  /* medium-dark brown */
