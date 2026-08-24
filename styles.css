@@ -8,17 +8,17 @@
   --bg: #FFFFFF;
 
   /* Grid circles: random fill picked between these two colors */
-  --circle-dark:   #6b4423;  /* medium-dark brown */
-  --circle-light:  #b98a53;  /* light brown */
+  --circle-dark:   #c38951;  /* medium-dark brown */
+  --circle-light:  #a29134;  /* light brown */
 
   /* Hover overlay circle: random fill picked between these two colors */
-  --overlay-start: #fff7c2;  /* light yellow */
-  --overlay-end:   #fffdf2;  /* near-white cream */
+  --overlay-start: #fff223;  /* light yellow */
+  --overlay-end:   #f8f6aa;  /* near-white cream */
 
   /* Sizes */
-  --circle-size: 28px;   /* diameter of a grid circle */
-  --cell-size: 64px;     /* grid pitch; spacing = cell-size - circle-size */
-  --overlay-size: 240px; /* diameter of the hover overlay circle */
+  --circle-size: 14px;   /* diameter of a grid circle */
+  --cell-size: 48px;     /* grid pitch; spacing = cell-size - circle-size */
+  --overlay-size: 160px; /* diameter of the hover overlay circle */
 
   /* Motion */
   --fade-in: 320ms;      /* new circles arriving via infinite scroll */
